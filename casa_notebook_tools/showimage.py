@@ -23,12 +23,13 @@ def showimage(imagename, title=None, stretch='asinh', mask=None, **kwargs):
     else:
         data = data.squeeze().T
 
-    pl.imshow(data,
-              norm=simple_norm(data,
-                               stretch=stretch,
-                               **kwargs))
+    im = pl.imshow(data, norm=simple_norm(data, stretch=stretch, **kwargs),
+                   origin='lower', interpolation='none',)
+
     if title is not None:
         pl.title(title)
     pl.gca().set_xticklabels([])
     pl.gca().set_yticklabels([])
     pl.colorbar()
+
+    return im
